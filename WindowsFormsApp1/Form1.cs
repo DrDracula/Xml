@@ -53,5 +53,19 @@ namespace WindowsFormsApp1
                 MessageBox.Show("Kaydedildi.");
             }
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            List<Ogrenci> okunanogrenciler = new List<Ogrenci>();
+            XmlSerializer srl = new XmlSerializer(typeof(List<Ogrenci>));
+            if(openFileDialog1.ShowDialog()==DialogResult.OK)
+            {
+                TextReader tr = new StreamReader(openFileDialog1.FileName);
+                okunanogrenciler = (List<Ogrenci>)srl.Deserialize(tr);
+                tr.Close();
+                dataGridView1.DataSource = null;
+                dataGridView1.DataSource = okunanogrenciler;
+            }
+        }
     }
 }
